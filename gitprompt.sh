@@ -563,7 +563,12 @@ function updatePrompt() {
       fi
       if eval "[[ ${v} ]]" ; then
         if [[ "${3-}" != '-' ]] && [[ "${__GIT_PROMPT_SHOW_CHANGED_FILES_COUNT}" == "1" || "${1-}" == "REMOTE" ]]; then
-          __add_status "\${GIT_PROMPT_${1}}\${GIT_${1}}\${ResetColor}"
+          local space
+          space=" "
+          if [[ "${1-}" == "REMOTE" ]]; then
+            space=""
+          fi
+          __add_status "\${GIT_PROMPT_${1}}\${GIT_${1}}\${ResetColor}\${space}"
         else
           __add_status "\${GIT_PROMPT_${1}}\${ResetColor}"
         fi
@@ -588,6 +593,8 @@ function updatePrompt() {
       __chk_gitvar_status 'UNTRACKED'  '!= "0"'
       __chk_gitvar_status 'STASHED'    '!= "0"'
       __chk_gitvar_status 'CLEAN'      '= "1"'   -
+      STATUS="${STATUS%% }"
+      STATUS="${STATUS%% }"
     fi
     __add_status        "${ResetColor}${GIT_PROMPT_SUFFIX}"
     
