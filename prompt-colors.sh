@@ -45,20 +45,26 @@ define_color_names() {
     done
   }
 
-  # _term_color [ N | N M ]
+  # _term_color [ N | N M | N M O... ]
   _term_color() {
     local cv
-    if [[ "${#}" -gt 1 ]]; then
-      cv="${1};${2}"
-    else
-      cv="${1}"
-    fi
+    cv="${1}"
+    shift
+    while [ -n "${1}" ]; do
+      cv="${cv};${1}"
+      shift
+    done
     echo "\[\033[${cv}m\]"
   }
 
   # def_color NAME ATTRCODE COLORCODE
   _def_color() {
     local def="${1}=\"\`_term_color ${2} ${3}\`\""
+    eval "${def}"
+  }
+
+  _def_256_color() {
+    local def="${1}=\"\`_term_color ${2} 5 ${3}\`\""
     eval "${def}"
   }
 
