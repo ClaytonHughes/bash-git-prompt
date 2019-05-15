@@ -76,6 +76,16 @@ define_color_names() {
   _def_color IntenseBlack 0 90
   _def_color ResetColor   0 0
 
+  _def_256_color BoldOrange 38 202
+  _def_256_color BrightOrange 38 208
+  _def_256_color DimOrange 38 130
+  _def_256_color Orange 38 166
+
+  _def_256_color BoldOrangeBg 48 202
+  _def_256_color BrightOrangeBg 48 208
+  _def_256_color DimOrangeBg 48 130
+  _def_256_color OrangeBg 48 166
+
 }
 
 # do the color definitions only once
